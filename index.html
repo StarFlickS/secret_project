@@ -1080,7 +1080,7 @@
     const midnight = new Date();
     midnight.setHours(24, 0, 0, 0); // next midnight
 
-    const diff = midnight - now;
+    const diff = -1;
 
     if (diff <= 0) {
       // Already past midnight — go straight to lock screen
