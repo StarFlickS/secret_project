@@ -778,6 +778,78 @@
       box-shadow: 0 8px 24px rgba(196, 110, 245, 0.22);
     }
 
+    /* ── COUNTDOWN SCREEN ── */
+    #countdown-screen {
+      position: fixed;
+      inset: 0;
+      z-index: 250;
+      background: var(--bg);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      padding: 32px 24px;
+      text-align: center;
+    }
+    #countdown-screen.hide {
+      animation: fadeOutUp 0.7s ease forwards;
+    }
+    .cd-top-icon {
+      font-size: 52px;
+      margin-bottom: 20px;
+      animation: floatAnim 3.5s ease-in-out infinite;
+    }
+    .cd-wait-text {
+      font-size: 12px;
+      letter-spacing: 4px;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 12px;
+    }
+    .cd-main-text {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(22px, 5vw, 38px);
+      font-weight: 700;
+      background: linear-gradient(135deg, #f9d4ff, #e89aff, #c46ef5);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      margin-bottom: 48px;
+      line-height: 1.3;
+    }
+    .cd-time-display {
+      font-family: 'Playfair Display', serif;
+      font-size: clamp(58px, 14vw, 110px);
+      font-weight: 700;
+      letter-spacing: -2px;
+      background: linear-gradient(135deg, #ffffff 0%, #e89aff 50%, #c46ef5 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      filter: drop-shadow(0 0 40px rgba(196, 110, 245, 0.4));
+      line-height: 1;
+      margin-bottom: 16px;
+      animation: timePulse 1s ease-in-out infinite alternate;
+    }
+    @keyframes timePulse {
+      from { filter: drop-shadow(0 0 30px rgba(196,110,245,0.3)); }
+      to   { filter: drop-shadow(0 0 55px rgba(196,110,245,0.6)); }
+    }
+    .cd-time-label {
+      font-size: 11px;
+      letter-spacing: 6px;
+      text-transform: uppercase;
+      color: var(--text-dim);
+      margin-bottom: 52px;
+    }
+    .cd-bottom-msg {
+      font-family: 'Playfair Display', serif;
+      font-style: italic;
+      font-size: 15px;
+      color: var(--text-dim);
+      opacity: 0.7;
+    }
+
     /* ── RESPONSIVE ── */
     @media (max-width: 480px) {
       .menu-grid { grid-template-columns: repeat(2, 1fr); gap: 10px; }
@@ -794,31 +866,33 @@
 <div id="stars-bg"></div>
 <div id="hearts-container"></div>
 
+<!-- COUNTDOWN SCREEN -->
+<div id="countdown-screen" style="display:none;">
+  <div class="cd-main-text">อดใจรออีกแปป</div>
+  <div class="cd-time-display" id="cd-time">00:00:00</div>
+  <div class="cd-time-label"> &nbsp;·&nbsp;  &nbsp;·&nbsp; </div>
+</div>
+
 <!-- LOCK SCREEN -->
-<div id="lock-screen">
+<div id="lock-screen" style="display:none;">
   <div class="lock-icon">🌹</div>
-  <div class="lock-title">เอ๊ะ ใช้คนนั้นหรือป่าวว</div>
-  <div class="lock-hint">ลองกรอกรหัสสิ คำใบคือ</div>
+  <div class="lock-title">Welcome</div>
+  <div class="lock-hint">กรอกรหัสเพื่อเข้าสู่ของขวัญพิเศษ</div>
   <div class="lock-clue">Achoo!</div>
   <div class="lock-input-wrap">
     <input class="lock-input" id="lock-input" type="text" placeholder="รหัสผ่าน..." autocomplete="off" spellcheck="false" onkeydown="if(event.key==='Enter') checkPassword()">
   </div>
   <div class="lock-error" id="lock-error"></div>
-  <button class="lock-btn" onclick="checkPassword()">แน่ใจอ่ะป่าววว</button>
+  <button class="lock-btn" onclick="checkPassword()">เข้าสู่ของขวัญ</button>
 </div>
 
 <!-- ROSE OVERLAY -->
 <div id="rose-overlay">
   <img class="rose-gif"
-    src="https://media0.giphy.com/media/v1.Y2lkPTc5MGI3NjExMHgwMmZqdzE4bTF1ajQzeHo4Ymt0ZW82MmN6Z3hlbmRldWJjb2h5OSZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/xT8qBhgUqOOWII72Pm/giphy.gif"
+    src="https://media.giphy.com/media/l3q2XhfQ8oCkm1Ts4/giphy.gif"
     alt="rose">
-  <div class="rose-msg">
-  ไม่มีตังซื้อดอกไม้ เอาอันนี้ไปก่อนละกัน 🌹
-</div>
-
-<button class="rose-enter-btn" onclick="enterMain()">
-  ไปกันต่ออ 💜
-</button>
+  <div class="rose-msg">สำหรับเธอคนพิเศษ 🌹<br>Happy Birthday Natntts</div>
+  <button class="rose-enter-btn" onclick="enterMain()">เข้าไปเลย 💜</button>
 </div>
 
 <!-- MODAL -->
@@ -833,7 +907,7 @@
 
 <!-- ════════════════ HOME ════════════════ -->
 <div class="page" id="home">
-  <div class="subtitle-tag">✦ From StarFlickS ✦</div>
+  <div class="subtitle-tag">✦ a little something special ✦</div>
   <div class="main-title">Happy Birthday</div>
   <span class="name-glow">Natntts</span>
   <div class="confetti-row">🎂 🌸 🎉 🎁 💜</div>
@@ -843,7 +917,7 @@
     <button class="menu-btn" onclick="showPage('wish')">
       <span class="icon">💌</span>
       <span class="btn-label">คำอวยพร</span>
-      <span class="btn-sub">ข้อความจากเค้า</span>
+      <span class="btn-sub">ข้อความจากใจ</span>
     </button>
     <button class="menu-btn" onclick="showPage('photos')">
       <span class="icon">📸</span>
@@ -877,28 +951,18 @@
     <div class="page-divider"></div>
 
     <div class="wish-card">
-    <div class="wish-text" id="wish-content">Happy Birthday น้าา คุณลัลน์วริน 🎂
+      <div class="wish-text" id="wish-content">Happy Birthday Natntts นะที่รัก 🎂
 
-เค้ายอมรับว่าเค้าเขียนคำอวยพรไม่เป็น5555 เค้าเลยจะเขียนสิ่งที่เค้าอยากจะบอกเทอละกัน
+วันนี้เป็นวันพิเศษของเธอ และฉันอยากให้เธอรู้ว่า เธอทำให้ทุกวันของฉันพิเศษขึ้นมากแค่ไหน
 
-ก่อนอื่นเลย เค้าอยากจะขอบคุณเทอมากๆ นะ ที่เข้ามาในชีวิตเค้า การที่ได้รู้จักเทอ มันเติมเต็มชีวิตเค้ามากๆ 
+ขอให้ทุกอย่างที่เธอฝันไว้เป็นจริง ขอให้มีแต่สิ่งดีๆ เข้ามาในชีวิต และขอให้รู้ว่ามีคนที่รักเธออยู่ตลอดเวลา 💜
 
-เค้าได้เรียนรู้ว่าการที่จะเป็นคู่ชีวิตที่ดี มันควรจะเป็นแบบไหน เราทั้งสองคนก็มีบททดสอบมาหลายครั้ง แต่ทุกครั้ง เราก็ผ่านมันมาได้ 
-
-เพราะว่าท้ายที่สุดแล้ว มีอย่างหนึ่งที่เราสองคนเห็นตรงกันเสมอ คือเรารักและอยากจะสร้างครอบครัวด้วยกัน 
-
-เค้าสัญญาว่า ตอนนี้เค้าจะแฟนที่ดีที่สุด เท่าที่เค้าจะสามารถเป็นให้เทอได้ และ ในอนาคตเมื่อเราทั้งคู่พร้อม เค้าก็จะทำหน้าที่ในบทบาทต่อไป ให้เต็มที่เช่นเดียวกัน 💜
-
-สุดท้ายนี้ ก็จะบอกเทอว่า Happy Birthday นะ 
-
-ขอให้มีความสุขมากๆ ตลอดปีนี้และทุกๆ ปีเลยย 
-
-ค่อยๆเดินไปที่ละก้าว ถ้าเหนื่อยก็ถอยหลังมาพัก 
-
-เค้าจะเดินไปพร้อมๆกับเทอนะ ไม่ต้องห่วง
-
-รักนะครับ คุณณัฐของผม ✨</div>
+Happy Birthday นะ — ขอให้มีความสุขมากๆ ตลอดปีนี้และทุกๆ ปีเลยนะ ✨</div>
       <div class="wish-sign">— with all my love 💜</div>
+    </div>
+
+    <div style="margin-top:14px; text-align:right;">
+      <button class="action-btn" onclick="openWishEditor()">✏️ แก้ไขคำอวยพร</button>
     </div>
 
     <div class="wish-editor" id="wish-editor">
@@ -1017,6 +1081,54 @@
     }
   })();
 
+  // ── COUNTDOWN TO MIDNIGHT ──
+  (function initCountdown() {
+    const now = new Date();
+    const midnight = new Date();
+    midnight.setHours(24, 0, 0, 0); // next midnight
+
+    const diff = midnight - now;
+
+    if (diff <= 0) {
+      // Already past midnight — go straight to lock screen
+      document.getElementById('countdown-screen').style.display = 'none';
+      document.getElementById('lock-screen').style.display = 'flex';
+      return;
+    }
+
+    // Show countdown screen, hide lock screen
+    document.getElementById('countdown-screen').style.display = 'flex';
+    document.getElementById('lock-screen').style.display = 'none';
+
+    function tick() {
+      const remaining = midnight - new Date();
+      if (remaining <= 0) {
+        clearInterval(timer);
+        // Transition to lock screen
+        const cs = document.getElementById('countdown-screen');
+        cs.classList.add('hide');
+        setTimeout(() => {
+          cs.style.display = 'none';
+          const ls = document.getElementById('lock-screen');
+          ls.style.display = 'flex';
+          ls.style.animation = 'fadeInUp 0.8s ease both';
+          spawnHearts(window.innerWidth / 2, window.innerHeight / 2);
+          setTimeout(() => spawnHearts(window.innerWidth / 2, window.innerHeight / 2), 500);
+        }, 700);
+        return;
+      }
+      const h = Math.floor(remaining / 3600000);
+      const m = Math.floor((remaining % 3600000) / 60000);
+      const s = Math.floor((remaining % 60000) / 1000);
+      document.getElementById('cd-time').textContent =
+        String(h).padStart(2,'0') + ':' +
+        String(m).padStart(2,'0') + ':' +
+        String(s).padStart(2,'0');
+    }
+    tick();
+    const timer = setInterval(tick, 1000);
+  })();
+
   // ── LOCK SCREEN ──
   function checkPassword() {
     const input = document.getElementById('lock-input');
@@ -1039,7 +1151,7 @@
       input.classList.remove('error');
       void input.offsetWidth; // reflow to restart animation
       input.classList.add('error');
-      errorEl.textContent = 'ถามจริง... ไอหอยหลอด';
+      errorEl.textContent = 'รหัสไม่ถูกต้อง — ลองอีกครั้งนะ 🌸';
       input.value = '';
       setTimeout(() => input.classList.remove('error'), 500);
     }
